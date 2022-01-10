@@ -59,20 +59,20 @@ def spec_movie1():
 def spec_movie2():
     return render_template("index_movie2.html")
 
-# @app.route("/spec_movie3/<some_list>", methods = ["POST", "GET"])
-# def spec_movie3(some_list):
-#     if request.method == "GET":
+@app.route("/spec_movie3/<some_list>", methods = ["POST", "GET"])
+def spec_movie3(some_list):
+    
 
-#         similar_titles = []
-#         typed_keys = some_list.split("_")
-#         for movie in original_titles:
-#             for key in typed_keys:
-#                 if key.lower() in movie.lower():
-#                     similar_titles.append(movie)
-#         similar_titles = list(set(similar_titles))
-        
-#         # return render_template("index_movie3.html", similar_titles = similar_titles,len = len(similar_titles))
-#         return render_template("index_movie0.html")
+    similar_titles = []
+    typed_keys = some_list.split("_")
+    for movie in original_titles:
+        for key in typed_keys:
+            if key.lower() in movie.lower():
+                similar_titles.append(movie)
+    similar_titles = list(set(similar_titles))
+    
+    return render_template("index_movie3.html", similar_titles = similar_titles,len = len(similar_titles))
+
 
 @app.route("/spec_movie4", methods = ["POST", "GET"])
 def spec_movie4():
@@ -98,21 +98,20 @@ def form2():
 
             movie_name = original_titles[lower_title.index(typed_name.lower())]
         else:
-            # similar_titles = []
-            # typed_keys = typed_name.split(" ")
-            # for movie in original_titles:
-            #     for key in typed_keys:
-            #         if key.lower() in movie.lower():
-            #             similar_titles.append(movie)
-            # similar_titles = list(set(similar_titles))
-            # comma_separated = ','.join(similar_titles)
+            similar_titles = []
+            typed_keys = typed_name.split(" ")
+            for movie in original_titles:
+                for key in typed_keys:
+                    if key.lower() in movie.lower():
+                        similar_titles.append(movie)
+            similar_titles = list(set(similar_titles))
+            comma_separated = ','.join(similar_titles)
 
 
-            # typed_name = typed_name.replace(" ", "_")
-            # return redirect(url_for('spec_movie3', some_list=typed_name))
+            typed_name = typed_name.replace(" ", "_")
+            return redirect(url_for('spec_movie3', some_list=typed_name))
 
-            #flash("We don't have the movie title in our database. <br>Please check spelling and spaces", 'fail')
-            return redirect(url_for('spec_movie4'))
+            
 
     algo = request.form.get('filter')
 
