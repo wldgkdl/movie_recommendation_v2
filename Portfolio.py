@@ -10,30 +10,6 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 app = Flask(__name__)
 app.secret_key = "wjdghks3#"
 
-
-# Movie overview data & matrix
-# cosine_sim1_1 = np.load('matrixs_meta/cosine_sim1_1_overview.npy')
-# cosine_sim1_2 = np.load('matrixs_meta/cosine_sim1_2_overview.npy')
-# cosine_sim = np.concatenate((cosine_sim1_1, cosine_sim1_2))
-# print(cosine_sim.shape)
-
-
-
-# indices = pd.read_csv('matrixs_meta/indices.csv')
-# indices.set_index('title', inplace = True)
-# print(indices.loc['The Dark Knight Rises'][0])
-
-
-# Movie metadata & matrix
-# cosine_sim2_1 = np.load('matrixs_meta/cosine_sim2_1_metadata.npy')
-# cosine_sim2_2 = np.load('matrixs_meta/cosine_sim2_2_metadata.npy')
-# cosine_sim2 = np.concatenate((cosine_sim2_1, cosine_sim2_2))
-# print(cosine_sim.shape)
-
-
-# indices2 = pd.read_csv('matrixs_meta/indices2.csv')
-# indices2.set_index('title_x', inplace = True)
-
 titles = pd.read_csv('matrixs_meta/titles.csv')
 lower_title = [i.lower() for i in titles['title']]
 original_titles = [i for i in titles['title']]
@@ -74,9 +50,9 @@ def spec_movie3(some_list):
     return render_template("index_movie3.html", similar_titles = similar_titles,len = len(similar_titles))
 
 
-@app.route("/spec_movie4", methods = ["POST", "GET"])
-def spec_movie4():
-    return render_template("index_movie4.html")
+# @app.route("/spec_movie4", methods = ["POST", "GET"])
+# def spec_movie4():
+#     return render_template("index_movie4.html")
      
 
 
@@ -114,48 +90,6 @@ def form2():
             
 
     algo = request.form.get('filter')
-
-    # # Function that takes in movie overview as input and outputs most similar movies
-    # def get_recommendations(title, cosine_sim=cosine_sim):
-    #     # Get the index of the movie that matches the title
-    #     idx = indices.loc[title][0]
-
-    #     # Get the pairwsie similarity scores of all movies with that movie
-    #     sim_scores = list(enumerate(cosine_sim[idx]))
-
-    #     # Sort the movies based on the similarity scores
-    #     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-    #     # Get the scores of the 10 most similar movies
-    #     sim_scores = sim_scores[1:11]
-        
-
-    #     # Get the movie indices
-    #     movie_indices = [i[0] for i in sim_scores]
-
-    #     # Return the top 10 most similar movies
-    #     return titles.iloc[movie_indices], sim_scores
-
-
-    # # Function that takes in movie metadata as input and outputs most similar movies
-    # def get_recommendations2(title, cosine_sim=cosine_sim2):
-    #     # Get the index of the movie that matches the title
-    #     idx = indices2.loc[title][0]
-
-    #     # Get the pairwsie similarity scores of all movies with that movie
-    #     sim_scores = list(enumerate(cosine_sim2[idx]))
-
-    #     # Sort the movies based on the similarity scores
-    #     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-    #     # Get the scores of the 10 most similar movies
-    #     sim_scores = sim_scores[1:11]
-
-    #     # Get the movie indices
-    #     movie_indices = [i[0] for i in sim_scores]
-
-    #     # Return the top 10 most similar movies
-    #     return titles.iloc[movie_indices], sim_scores
     
     if algo == 'Plot description':
 
